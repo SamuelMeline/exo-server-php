@@ -4,19 +4,34 @@
 
 require_once __DIR__.'/../config/env.php';
 
+function render(string $viewPath): string
+{
+    ob_start();
+        require_once __DIR__.'/../templates/'.ltrim($viewPath, '/');
+    return ob_get_clean();
+}
+
 // path = <website-url>/my-path
 $path = $_SERVER['PATH_INFO'] ?? '/';
 
 $content = '';
 try {
     if ($path === '/') {
-        $content = '<h1>Bienvenue sur notre site !</h1>';
-
-        $sensitiveInfo = '';
-        if ($_ENV['env'] !== 'production') {
-            $sensitiveInfo = 'Informations sensibles...';
-        }
+        $content = render('home.html');
     }
+
+    // créer une route /about
+
+    // créer une route /posts
+
+    // créer une route /posts/show qui prend un paramètre 'id'
+    // 'id' doit représenter un numérique 1, 2, 100 etc.
+    // afficher l'id dans votre page html, exemple : post n°<id>
+    // attention aux failles de sécurité
+
+    // créer une route api/token
+    // renvoie un token au format json
+    // regarder header, type-mime et Content-Type
 
     else {
         throw new LogicException("<h1>Cette page n'existe pas!</h1>");
