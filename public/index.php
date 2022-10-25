@@ -16,8 +16,6 @@ try {
         if ($_ENV['env'] !== 'production') {
             $sensitiveInfo = 'Informations sensibles...';
         }
-
-        throw new Exception("Erreur de traitement : ".$sensitiveInfo);
     }
 
     else {
